@@ -1,0 +1,12 @@
+/* empty css                      */import{i as a,S as f}from"./assets/vendor-CMdlDMgr.js";(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))n(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const i of r.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&n(i)}).observe(document,{childList:!0,subtree:!0});function s(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(e){if(e.ep)return;e.ep=!0;const r=s(e);fetch(e.href,r)}})();function h(o){return o.map(t=>`
+    <a href="${t.largeImageURL}" class="gallery-item">
+      <img src="${t.webformatURL}" alt="${t.tags}" class="gallery_image">
+      <div class="gallery-info">
+        <p><b>Likes:</b> ${t.likes}</p>
+        <p><b>Views:</b> ${t.views}</p>
+        <p><b>Comments:</b> ${t.comments}</p>
+        <p><b>Downloads:</b> ${t.downloads}</p>
+      </div>
+    </a>
+  `).join("")}const m="https://pixabay.com/api/",p="47496497-c7088e577ab65ea786e483a4c";a.settings({timeout:1e3,color:"#EF4040",position:"topRight",titleColor:"#fff",messageColor:"#fff",imageWidth:24,iconColor:"#fff"});function d(o){const t=new URLSearchParams({key:`${p}`,q:o,image_type:"photo",orientation:"horizontal",safesearch:!0}),s=`${m}?${t}`;return fetch(s,{method:"GET",headers:{Accept:"application/json",Host:"http://localhost:5173",Origin:"https://pixabay.com/api"}}).then(e=>{if(!e.ok)throw new Error(e.status);return e.json()}).then(e=>e.hits.length===0?(a.info({title:"No Results",message:"Sorry, there are no images matching your search query. Please try again!"}),[]):e.hits).catch(e=>(a.error({title:"Error",message:"Something went wrong. Please try again later."}),[]))}const l=document.getElementById("search-form"),c=document.querySelector(".gallery"),u=document.getElementById("loader");function y(){u.style.display="block"}function g(){u.style.display="none"}b();y();function b(){c.innerHTML=""}l.addEventListener("submit",L);function L(o){o.preventDefault();const t=o.target.elements.searchQuery.value.trim();if(!t){iziToast.warning({title:"Empty Field",message:"Please enter a search query."});return}d(t).then(s=>{g(),s.length>0&&(c.innerHTML=h(s),new f(".gallery a").refresh()),l.reset()})}
+//# sourceMappingURL=index.js.map
